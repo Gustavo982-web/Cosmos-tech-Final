@@ -1,0 +1,420 @@
+/* Home */
+.section {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: min(760px, 78vh);
+  padding: 76px max(7vw, calc((100vw - 1200px) / 2));
+  overflow: hidden;
+  background: linear-gradient(90deg, rgba(2, 11, 24, 0.94) 0%, rgba(2, 11, 24, 0.72) 48%, rgba(2, 11, 24, 0.18) 100%), linear-gradient(0deg, rgba(2, 11, 24, 0.58), transparent 48%), url('./Imgs/fundo-de-galaxia-espacial.jpg') center 46% / cover;
+  text-align: left;
+}
+
+.section::after {
+  position: absolute;
+  inset: 0;
+  border-bottom: 1px solid rgba(184, 212, 232, 0.18);
+  content: '';
+  pointer-events: none;
+}
+
+.content-container {
+  position: relative;
+  z-index: 1;
+  max-width: 780px;
+  animation: fadeInUp 0.8s ease both;
+}
+
+.explore-text,
+.section-kicker,
+.path-index {
+  color: #75e4e8;
+  font-family: var(--font-title);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+}
+
+.explore-text {
+  margin-bottom: 24px;
+}
+
+.explore-text span {
+  padding: 0 8px;
+  color: #f0a85b;
+}
+
+.section h1 {
+  max-width: 760px;
+  margin-bottom: 22px;
+  color: #fff;
+  font-family: var(--font-title);
+  font-size: 3.2rem;
+  font-weight: 600;
+  line-height: 1.18;
+}
+
+.cosmos-tech {
+  color: #91e3db;
+  background: none;
+  -webkit-text-fill-color: currentColor;
+}
+
+.subtitle {
+  max-width: 590px;
+  margin-bottom: 30px;
+  color: #d5e1e8;
+  font-size: 1.08rem;
+  line-height: 1.75;
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.btn {
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 12px 18px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: transform 180ms ease, background-color 180ms ease, border-color 180ms ease;
+}
+
+.btn:hover,
+.path-card:hover {
+  transform: translateY(-3px);
+}
+
+.btn-explore {
+  background: #a9e7df;
+  color: #08232b;
+}
+
+.btn-explore:hover {
+  background: #c4f2eb;
+}
+
+.btn-quiz {
+  border-color: rgba(213, 225, 232, 0.48);
+  background: rgba(3, 20, 43, 0.42);
+  color: #fff;
+}
+
+.btn-quiz:hover {
+  border-color: #a9e7df;
+  background: rgba(3, 20, 43, 0.78);
+}
+
+.hero-scroll {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 48px;
+  color: #d5e1e8;
+  font-size: 0.82rem;
+}
+
+.hero-scroll span {
+  color: #f0a85b;
+  font-size: 1.1rem;
+}
+
+.hero-coordinate {
+  position: absolute;
+  right: max(7vw, calc((100vw - 1200px) / 2));
+  bottom: 32px;
+  z-index: 1;
+  color: rgba(255, 255, 255, 0.7);
+  font-family: var(--font-title);
+  font-size: 0.65rem;
+  letter-spacing: 1.2px;
+}
+
+.content {
+  width: 100%;
+  color: var(--text-primary);
+}
+
+.cosmic-scale,
+.exploration-paths {
+  padding: 88px max(7vw, calc((100vw - 1200px) / 2));
+}
+
+.cosmic-scale {
+  background: linear-gradient(115deg, #071a25, #0a2027 55%, #10252a);
+}
+
+.section-heading {
+  max-width: 690px;
+  margin-bottom: 42px;
+}
+
+.section-heading h2 {
+  margin: 12px 0 10px;
+  color: #f4f7f6;
+  font-family: var(--font-title);
+  font-size: 1.9rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.section-heading > p:last-child,
+.paths-note {
+  color: #b8cbd0;
+  font-size: 0.98rem;
+  line-height: 1.7;
+}
+
+.section-kicker {
+  color: #e7a764;
+}
+
+.scale-facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 34px;
+}
+
+.scale-fact {
+  min-width: 0;
+  padding: 20px 18px 0 0;
+  border-top: 1px solid rgba(169, 231, 223, 0.45);
+}
+
+.fact-number {
+  display: block;
+  color: #a9e7df;
+  font-family: var(--font-title);
+  font-size: 2.1rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.fact-number small {
+  color: #f0a85b;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.scale-fact p {
+  max-width: 275px;
+  margin-top: 10px;
+  color: #d1dcde;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.exploration-paths {
+  background: #06121d;
+}
+
+.paths-heading {
+  margin-bottom: 30px;
+}
+
+.path-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.path-card {
+  position: relative;
+  display: flex;
+  min-height: 330px;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  padding: 22px;
+  border: 1px solid rgba(213, 225, 232, 0.2);
+  border-radius: 4px;
+  background-position: center;
+  background-size: cover;
+  color: #fff;
+  transition: transform 200ms ease, border-color 200ms ease;
+}
+
+.path-card::before {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(2, 11, 24, 0.25) 0%, rgba(2, 11, 24, 0.3) 30%, rgba(2, 11, 24, 0.94) 100%);
+  content: '';
+  transition: background-color 200ms ease;
+}
+
+.path-card:hover {
+  border-color: #a9e7df;
+}
+
+.path-index,
+.path-card > div {
+  position: relative;
+  z-index: 1;
+}
+
+.path-solar {
+  background-image: url('./Imgs/planet-6215636_1920.jpg');
+}
+
+.path-missions {
+  background-image: url('./Imgs/Fotos do pouso da Apollo 11 na lua que a NASA não queria que você visse.jpg');
+}
+
+.path-card h3 {
+  max-width: 420px;
+  margin-bottom: 8px;
+  font-family: var(--font-title);
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.path-card p {
+  max-width: 410px;
+  margin-bottom: 16px;
+  color: #d5e1e8;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.path-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: #a9e7df;
+  font-size: 0.87rem;
+  font-weight: 600;
+}
+
+.paths-note {
+  margin-top: 22px;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 768px) {
+  .section {
+    min-height: 650px;
+    padding: 76px 28px 66px;
+    background-position: 58% center;
+  }
+
+  .section h1 {
+    font-size: 2.5rem;
+  }
+
+  .cosmic-scale,
+  .exploration-paths {
+    padding: 68px 28px;
+  }
+
+  .scale-facts {
+    gap: 22px;
+  }
+
+  .fact-number {
+    font-size: 1.65rem;
+  }
+
+  .path-card {
+    min-height: 300px;
+    padding: 18px;
+  }
+}
+
+@media (max-width: 560px) {
+  .section {
+    min-height: 620px;
+    padding: 64px 20px 56px;
+    background-image: linear-gradient(90deg, rgba(2, 11, 24, 0.86), rgba(2, 11, 24, 0.5)), linear-gradient(0deg, rgba(2, 11, 24, 0.68), transparent 65%), url('./Imgs/fundo-de-galaxia-espacial.jpg');
+    background-position: 60% center;
+  }
+
+  .content-container {
+    max-width: 100%;
+  }
+
+  .explore-text {
+    font-size: 0.62rem;
+  }
+
+  .section h1 {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 0.97rem;
+  }
+
+  .buttons {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .btn {
+    justify-content: space-between;
+  }
+
+  .hero-scroll {
+    margin-top: 28px;
+  }
+
+  .hero-coordinate {
+    right: 20px;
+    bottom: 18px;
+    font-size: 0.55rem;
+  }
+
+  .cosmic-scale,
+  .exploration-paths {
+    padding: 58px 20px;
+  }
+
+  .section-heading {
+    margin-bottom: 30px;
+  }
+
+  .section-heading h2 {
+    font-size: 1.55rem;
+  }
+
+  .scale-facts,
+  .path-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .scale-facts {
+    gap: 18px;
+  }
+
+  .scale-fact {
+    padding-top: 14px;
+  }
+
+  .fact-number {
+    font-size: 1.8rem;
+  }
+
+  .path-card {
+    min-height: 280px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .content-container {
+    animation: none;
+  }
+
+  .btn,
+  .path-card {
+    transition: none;
+  }
+}

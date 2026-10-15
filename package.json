@@ -1,0 +1,30 @@
+{
+  "name": "cosmos-tech",
+  "version": "2.0.0",
+  "description": "Cosmos-TECH - Plataforma educativa sobre o espaço em Node.js",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "start:json": "node -e \"process.env.DB_MODE='json'; process.env.NODE_ENV='development'; require('./app.js')\"",
+    "lint": "node -e \"const fs=require('fs'); const path=require('path'); const root=process.cwd(); const files=[]; function walk(dir){for (const entry of fs.readdirSync(dir,{withFileTypes:true})) { const full=path.join(dir, entry.name); if (entry.isDirectory()) walk(full); else if (entry.isFile() && full.endsWith('.js')) files.push(full); } } walk(path.join(root,'src')); files.unshift(path.join(root,'app.js')); for (const file of files) { require('child_process').execFileSync(process.execPath, ['--check', file], {stdio:'inherit'}); }\"",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "author": "Cosmos-TECH Team",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^3.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.2",
+    "express-rate-limit": "^8.7.0",
+    "helmet": "^8.0.0",
+    "mysql2": "^3.10.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}

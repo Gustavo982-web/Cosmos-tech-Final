@@ -1,0 +1,249 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sistema Solar | Cosmos Tech</title>
+    <link rel="stylesheet" href="global.css" />
+    <script src="./auth-guard.js"></script>
+    <script src="./site-nav.js" defer></script>
+    <link rel="stylesheet" href="content-pages.css" />
+  </head>
+  <body class="content-page solar-page">
+    <header class="navbar">
+      <div class="logo">
+        <img src="./Imgs/ICONE.png" alt="Cosmos Tech Logo" />
+        <span><span class="cosmos">COSMOS</span><span class="tech">TECH</span></span>
+      </div>
+      <nav class="menu" id="mainMenu"></nav>
+    </header>
+
+    <main class="content-wrapper">
+      <section class="hero" id="inicio">
+        <p class="section-kicker">SISTEMA SOLAR / 01</p>
+        <h1>Nosso lar no espaço</h1>
+        <p>O Sistema Solar tem cerca de 4,6 bilhões de anos e reúne o Sol, oito planetas, dezenas de luas e milhões de corpos menores. O Sol concentra praticamente toda a massa do sistema e organiza a gravidade de tudo ao seu redor.</p>
+        <div class="toc">
+          <a href="#visao-geral">Visão geral</a>
+          <a href="#astros">Astros</a>
+          <a href="#extra">Extras</a>
+          <a href="#fontes">Fontes</a>
+        </div>
+      </section>
+
+      <div class="article-grid">
+        <article class="article" id="visao-geral">
+          <h2>Visão geral</h2>
+          <p>O Sistema Solar gira em torno do Sol, uma estrela de classe G que domina a região interna do sistema com luz e energia suficientes para sustentar a vida na Terra. A maior parte dos planetas se divide entre mundos rochosos, como Mercúrio, Vênus, Terra e Marte, e gigantes gasosos e de gelo, como Júpiter, Saturno, Urano e Netuno.</p>
+          <p>O campo gravitacional do Sol também afeta cometas, asteroides, cinturões de detritos e corpos menores. Em escala, a distância entre a Terra e o Sol é de aproximadamente 150 milhões de quilômetros, medida que chamamos de unidade astronômica.</p>
+          <h3>Escala simples</h3>
+          <div class="scale-bar" aria-label="Escala de tamanho relativo do Sistema Solar">
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <p>O Sol é muito maior que a Terra: em volume, caberiam mais de um milhão de Terras dentro do Sol. Já os planetas gigantes ocupam grande parte da região externa e abrigam sistemas de luas e anéis muito complexos.</p>
+          <h3>Planetas e astros</h3>
+          <ul>
+            <li>Seis planetas têm luas: Terra, Marte, Júpiter, Saturno, Urano e Netuno.</li>
+            <li>O cinturão de asteroides fica entre Marte e Júpiter.</li>
+            <li>Plutão foi reclassificado como planeta anão pela União Astronômica Internacional.</li>
+          </ul>
+        </article>
+
+        <aside class="info-panel" id="astros">
+          <h3>Fatos rápidos</h3>
+          <p><strong>Idade estimada:</strong> ~4,6 bilhões de anos.</p>
+          <p><strong>Estrela central:</strong> Sol.</p>
+          <p><strong>Planetas:</strong> 8.</p>
+          <p><strong>Planetas anões:</strong> 5 reconhecidos em uma classificação recente.</p>
+          <p><strong>Distância média da Terra ao Sol:</strong> 1 UA.</p>
+          <h3>Você sabia?</h3>
+          <ul>
+            <li>Vênus gira em sentido contrário da maior parte dos planetas.</li>
+            <li>Marte tem o monte mais alto do sistema: Olympus Mons.</li>
+            <li>Saturno é tão leve que, em um oceano gigante, flutuaria.</li>
+          </ul>
+        </aside>
+      </div>
+
+      <section class="article">
+        <h2>Astros do Sistema Solar</h2>
+        <div class="planet-grid">
+          <div class="planet-card"><div class="tag">Estrela</div><h4>Sol</h4><p>Tipo: estrela. Diâmetro: ~1,39 milhão de km. Temperatura da fotosfera: ~5.500 °C. Curiosidade: a energia solar leva cerca de 8 minutos e 20 segundos para chegar à Terra.</p></div>
+          <div class="planet-card"><div class="tag">Rochoso</div><h4>Mercúrio</h4><p>Diâmetro: ~4.879 km. Dia muito longo e ano muito curto. Curiosidade: seu campo magnético ainda surpreende cientistas.</p></div>
+          <div class="planet-card"><div class="tag">Rochoso</div><h4>Vênus</h4><p>Atmosfera muito densa e extremamente quente. Curiosidade: é o planeta mais quente por causa do efeito estufa.</p></div>
+          <div class="planet-card"><div class="tag">Rochoso</div><h4>Terra</h4><p>Único planeta conhecido com vida. Curiosidade: a Lua ajuda a estabilizar a inclinação da Terra.</p></div>
+          <div class="planet-card"><div class="tag">Rochoso</div><h4>Marte</h4><p>Planeta vermelho e laboratório natural para a busca por vida passada. Curiosidade: Olympus Mons é o maior vulcão conhecido do sistema.</p></div>
+          <div class="planet-card"><div class="tag">Gigante gasoso</div><h4>Júpiter</h4><p>Maior planeta do sistema. Curiosidade: a Grande Mancha Vermelha é uma tempestade enorme há séculos.</p></div>
+          <div class="planet-card"><div class="tag">Gigante gasoso</div><h4>Saturno</h4><p>Conhecido pelos anéis. Curiosidade: seus anéis são formados por gelo e rocha em bilhões de partículas.</p></div>
+          <div class="planet-card"><div class="tag">Gigante de gelo</div><h4>Urano</h4><p>Gira praticamente de lado. Curiosidade: um ano em Urano dura cerca de 84 anos terrestres.</p></div>
+          <div class="planet-card"><div class="tag">Gigante de gelo</div><h4>Netuno</h4><p>Planeta mais distante. Curiosidade: ventos podem superar 2.000 km/h.</p></div>
+          <div class="planet-card"><div class="tag">Lua</div><h4>Lua</h4><p>O satélite natural da Terra. Curiosidade: influencia marés e estabiliza a inclinação do eixo do planeta.</p></div>
+        </div>
+      </section>
+
+      <section class="article" id="extra">
+        <h2>Detalhes importantes</h2>
+        <h3>Cinturão de asteroides</h3>
+        <p>Entre Marte e Júpiter fica uma região cheia de corpos rochosos que nunca se juntaram num planeta por causa da influência gravitacional de Júpiter.</p>
+        <h3>Planetas anões</h3>
+        <p>Plutão, Ceres, Eris, Haumea e Makemake são exemplos. O caso mais conhecido é Plutão, que perdeu o status de planeta por não ter “domínio orbital” claro em torno do Sol.</p>
+        <h3>Cometas</h3>
+        <p>Cometas são corpos gelados que se aquecem quando se aproximam do Sol, liberando gases e poeira e deixando caudas brilhantes.</p>
+        <h3>Luas notáveis</h3>
+        <p>Europa, Encélado, Titã, Io e Ganimedes mostram como a diversidade do sistema solar vai além dos planetas.</p>
+        <h3>Você sabia?</h3>
+        <ul>
+          <li>O Sol representa cerca de 99,86% da massa total do Sistema Solar.</li>
+          <li>Mercúrio não é o planeta mais quente por ser o mais próximo do Sol; Vênus é mais quente por causa do efeito estufa.</li>
+          <li>Júpiter é tão grande que cabem mais de 1.300 Terras em seu volume.</li>
+          <li>Saturno tem anéis que se estendem por milhares de quilômetros, mas são muito finos.</li>
+          <li>Uma semana em Netuno equivale a pouco mais de 16 horas terrestres.</li>
+        </ul>
+        <h3>Glossário</h3>
+        <ul>
+          <li><strong>Órbita:</strong> caminho que um corpo percorre ao redor de outro devido à gravidade.</li>
+          <li><strong>Unidade astronômica:</strong> distância média da Terra ao Sol.</li>
+          <li><strong>Exoplaneta:</strong> planeta fora do Sistema Solar.</li>
+          <li><strong>Ano-luz:</strong> distância percorrida pela luz em um ano.</li>
+        </ul>
+      </section>
+
+      <section class="article" id="fontes">
+        <h2>Fontes</h2>
+        <ul>
+          <li><a href="https://www.nasa.gov/" target="_blank" rel="noreferrer">NASA</a></li>
+          <li><a href="https://www.esa.int/" target="_blank" rel="noreferrer">ESA</a></li>
+          <li><a href="https://www.inpe.br/" target="_blank" rel="noreferrer">INPE</a></li>
+          <li><a href="https://www.gov.br/cnpq/pt-br" target="_blank" rel="noreferrer">CNPq / pesquisa brasileira</a></li>
+        </ul>
+      </section>
+
+      <section class="quiz-zone">
+        <h2>Quiz: Sistema Solar</h2>
+        <div class="progress"><div id="progressBar" class="progress-bar"></div></div>
+        <div id="questionBox"></div>
+        <div id="resultBox" class="result-box"></div>
+        <div class="quiz-actions">
+          <button id="prevBtn" class="secondary-btn" type="button">Anterior</button>
+          <button id="nextBtn" class="primary-btn" type="button">Próxima</button>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const questions = [
+        { question: "Qual é a estrela central do Sistema Solar?", options: ["Vênus", "Sol", "Marte", "Júpiter"], answer: 1, explanation: "O Sol concentra praticamente toda a massa do Sistema Solar e é a estrela central." },
+        { question: "Qual planeta é conhecido como o planeta vermelho?", options: ["Mercúrio", "Vênus", "Marte", "Netuno"], answer: 2, explanation: "A superfície marciana tem óxido de ferro, que dá a cor avermelhada." },
+        { question: "Qual planeta tem os mais famosos anéis visíveis?", options: ["Saturno", "Mercúrio", "Terra", "Urano"], answer: 0, explanation: "Saturno é famoso por seus espetaculares anéis compostos por gelo e rocha." },
+        { question: "Qual planeta é o mais quente do Sistema Solar?", options: ["Mercúrio", "Vênus", "Marte", "Júpiter"], answer: 1, explanation: "A atmosfera densa de Vênus aprisiona calor, tornando-o mais quente que Mercúrio." },
+        { question: "Onde fica o cinturão de asteroides?", options: ["Entre Terra e Marte", "Entre Marte e Júpiter", "Entre Saturno e Urano", "Entre o Sol e Mercúrio"], answer: 1, explanation: "Entre Marte e Júpiter existe uma região de corpos rochosos." },
+        { question: "Qual planeta é o menor do Sistema Solar?", options: ["Mercúrio", "Vênus", "Marte", "Plutão"], answer: 0, explanation: "Mercúrio é o menor e o mais próximo do Sol." },
+        { question: "Qual planeta gigante tem uma grande mancha vermelha?", options: ["Urano", "Saturno", "Júpiter", "Netuno"], answer: 2, explanation: "A Grande Mancha Vermelha é uma tempestade gigantesca em Júpiter." },
+        { question: "Qual dos seguintes é um planeta anão?", options: ["Plutão", "Mercúrio", "Vênus", "Terra"], answer: 0, explanation: "Plutão é classificado como planeta anão." },
+        { question: "Qual planeta gira praticamente de lado?", options: ["Urano", "Júpiter", "Marte", "Terra"], answer: 0, explanation: "Urano tem uma inclinação extrema, quase de lado." },
+        { question: "Qual é a distância média da Terra ao Sol?", options: ["1 unidade astronômica", "1 ano-luz", "1 milhão de quilômetros", "1 hora-luz"], answer: 0, explanation: "A unidade astronômica é a distância média da Terra ao Sol." }
+      ];
+
+      let current = 0;
+      let answers = new Array(questions.length).fill(null);
+      const questionBox = document.getElementById("questionBox");
+      const progressBar = document.getElementById("progressBar");
+      const resultBox = document.getElementById("resultBox");
+      const nextButton = document.getElementById("nextBtn");
+      let finished = false;
+
+      function shuffleOptions(options) {
+        const arr = [...options];
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      }
+
+      function renderQuestion() {
+        const q = questions[current];
+        const options = shuffleOptions(q.options);
+        questionBox.innerHTML = `
+          <div class="question active">
+            <h3>${current + 1}. ${q.question}</h3>
+            <div class="options">
+              ${options.map((option, index) => {
+                const originalIndex = q.options.indexOf(option);
+                return `<label class="option"><input type="radio" name="answer-${current}" value="${originalIndex}" ${answers[current] === originalIndex ? "checked" : ""} />${option}</label>`;
+              }).join("")}
+            </div>
+          </div>
+        `;
+
+        document.querySelectorAll(`input[name="answer-${current}"]`).forEach((input) => {
+          input.addEventListener("change", function () {
+            answers[current] = Number(this.value);
+            nextButton.disabled = false;
+          });
+        });
+        nextButton.disabled = answers[current] === null;
+        nextButton.textContent = current === questions.length - 1 ? "Ver resultado" : "Próxima";
+        const percent = ((current + 1) / questions.length) * 100;
+        progressBar.style.width = `${percent}%`;
+      }
+
+      async function calculateResult() {
+        if (finished || answers.includes(null)) return;
+        finished = true;
+        const correct = questions.reduce((count, q, idx) => count + (answers[idx] === q.answer ? 1 : 0), 0);
+        let message = "Você está no caminho certo!";
+        if (correct >= 8) message = "Excelente! Você conhece bem o Sistema Solar.";
+        else if (correct >= 6) message = "Muito bom! Algumas ideias merecem mais observação.";
+        else if (correct >= 4) message = "Boa base, mas vale revisar alguns pontos.";
+        else message = "Estude mais um pouco; o universo tem muito a ensinar.";
+
+        resultBox.innerHTML = `<strong>${message}</strong><br />Você acertou ${correct} de ${questions.length}.`;
+        resultBox.classList.add("visible");
+        nextButton.disabled = true;
+
+        const user = JSON.parse(sessionStorage.getItem("cosmos_user") || "null");
+        if (!user || !user.id) {
+          resultBox.insertAdjacentHTML("beforeend", '<br /><a href="./login.html">Entre para salvar sua pontuação.</a>');
+          return;
+        }
+
+        try {
+          const response = await fetch("/quiz/salvar", {
+            method: "POST",
+            headers: { "Content-Type": "application/json", "X-User-Id": String(user.id) },
+            body: JSON.stringify({ certas: correct, erradas: questions.length - correct, fkQuiz: 1 }),
+          });
+          const data = await response.json();
+          if (!response.ok) throw new Error(data.message || "Não foi possível salvar o resultado.");
+          resultBox.insertAdjacentHTML("beforeend", "<br />Pontuação salva no seu perfil.");
+        } catch (error) {
+          const saveError = document.createElement("p");
+          saveError.textContent = error.message;
+          resultBox.append(saveError);
+        }
+      }
+
+      nextButton.addEventListener("click", function () {
+        if (answers[current] === null || finished) return;
+        if (current < questions.length - 1) {
+          current += 1;
+          renderQuestion();
+        } else {
+          calculateResult();
+        }
+      });
+
+      document.getElementById("prevBtn").addEventListener("click", function () {
+        if (current > 0 && !finished) {
+          current -= 1;
+          renderQuestion();
+        }
+      });
+
+      // Navbar controlada centralmente por site-nav.js (fonte unica de verdade).
+
+      renderQuestion();
+    </script>
+  </body>
+</html>

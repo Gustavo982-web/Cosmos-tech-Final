@@ -1,0 +1,420 @@
+.content-page {
+  min-height: 100vh;
+  background: #08171d;
+  color: #f2f5f2;
+}
+
+.content-page main > section,
+.content-page main > .article-grid {
+  margin-top: 36px;
+}
+
+.content-page .content-wrapper {
+  width: min(1160px, calc(100% - 48px));
+  max-width: none;
+  margin: 0 auto;
+  padding: 32px 0 80px;
+}
+
+.content-page .hero {
+  position: relative;
+  display: flex;
+  min-height: 330px;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  margin-top: 0;
+  padding: 42px 38px;
+  border: 0;
+  border-left: 3px solid #91d9c5;
+  border-radius: 0;
+  background: #0d2026;
+}
+
+.content-page .hero > * {
+  position: relative;
+  z-index: 1;
+}
+
+.solar-page .hero {
+  background-image:
+    linear-gradient(90deg, rgba(8, 23, 29, 0.92), rgba(8, 23, 29, 0.68) 58%, rgba(8, 23, 29, 0.22)),
+    url('./Imgs/planet-6215636_1920.jpg');
+  background-position: center;
+  background-size: cover;
+}
+
+.travel-page .hero {
+  background-image:
+    linear-gradient(90deg, rgba(8, 23, 29, 0.88), rgba(8, 23, 29, 0.56) 52%, rgba(8, 23, 29, 0.12)),
+    url('./Imgs/astrounata2.jpg');
+  background-position: center 42%;
+  background-size: cover;
+}
+
+.content-page .hero h1 {
+  max-width: 800px;
+  margin: 8px 0 14px;
+  color: #f2f5f2;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 2.35rem;
+  font-weight: 600;
+  line-height: 1.18;
+  letter-spacing: 0;
+}
+
+.content-page .hero > p:not(.section-kicker) {
+  max-width: 760px;
+  margin-bottom: 0;
+  color: #c0ceca;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.content-page .section-kicker {
+  color: #e0ac72;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 1.1px;
+}
+
+.content-page .toc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  margin: 20px 0 0;
+}
+
+.content-page .toc a {
+  padding: 7px 2px;
+  border: 0;
+  border-bottom: 1px solid #49615e;
+  border-radius: 0;
+  background: transparent;
+  color: #a9dfcf;
+  font-size: 0.86rem;
+}
+
+.content-page .article-grid {
+  align-items: start;
+  gap: 48px;
+}
+
+.solar-page .article-grid {
+  grid-template-columns: minmax(0, 1.2fr) minmax(230px, 0.8fr);
+}
+
+.travel-page .article-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+}
+
+.content-page .article,
+.content-page .info-panel {
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.content-page .article h2,
+.content-page .info-panel h3 {
+  margin: 0 0 14px;
+  color: #f2f5f2;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.content-page .article h3,
+.content-page .info-panel h3:not(:first-child) {
+  margin: 26px 0 10px;
+  color: #91d9c5;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.02rem;
+  font-weight: 600;
+}
+
+.content-page .article p,
+.content-page .article li,
+.content-page .info-panel p,
+.content-page .info-panel li {
+  color: #c0ceca;
+  font-size: 0.96rem;
+  line-height: 1.75;
+}
+
+.content-page .article p + p {
+  margin-top: 14px;
+}
+
+.content-page .article ul,
+.content-page .info-panel ul {
+  display: grid;
+  gap: 8px;
+  padding-left: 20px;
+  list-style: disc;
+}
+.content-page .info-panel {
+  padding: 4px 0 4px 20px;
+  border-left: 1px solid #41625d;
+}
+
+.content-page .planet-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 0 22px;
+  margin-top: 20px;
+}
+
+.content-page .scale-bar {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.content-page .scale-bar span {
+  display: block;
+  height: 18px;
+  background: linear-gradient(135deg, #91d9c5, #e0ac72);
+}
+
+.content-page .planet-card {
+  padding: 16px 0;
+  border: 0;
+  border-bottom: 1px solid rgba(157, 190, 182, 0.2);
+  border-radius: 0;
+  background: transparent;
+}
+
+.content-page .planet-card h4 {
+  color: #91d9c5;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1rem;
+}
+
+.content-page .tag {
+  color: #e0ac72;
+  font-size: 0.69rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+}
+
+.content-page .timeline {
+  position: relative;
+  display: grid;
+  gap: 0;
+  padding-left: 22px;
+}
+
+.content-page .timeline::before {
+  position: absolute;
+  top: 12px;
+  bottom: 12px;
+  left: 4px;
+  width: 1px;
+  background: rgba(145, 217, 197, 0.42);
+  content: "";
+}
+
+.content-page .timeline-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 105px minmax(0, 1fr);
+  gap: 20px;
+  padding: 18px 0 18px 2px;
+  border: 0;
+  border-bottom: 1px solid rgba(157, 190, 182, 0.2);
+  border-radius: 0;
+  background: transparent;
+  color: #c0ceca;
+  line-height: 1.7;
+}
+
+.content-page .timeline-item::before {
+  position: absolute;
+  top: 25px;
+  left: -22px;
+  width: 7px;
+  height: 7px;
+  border: 1px solid #91d9c5;
+  border-radius: 50%;
+  background: #08171d;
+  content: "";
+}
+
+.content-page .year {
+  color: #e0ac72;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.92rem;
+}
+
+.content-page .quiz-zone {
+  margin-top: 52px;
+  padding: 28px 0 0;
+  border: 0;
+  border-top: 1px solid rgba(157, 190, 182, 0.24);
+  border-radius: 0;
+  background: transparent;
+}
+
+.content-page .quiz-zone h2 {
+  margin: 0 0 18px;
+  color: #f2f5f2;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.35rem;
+}
+
+.content-page .progress {
+  height: 5px;
+  border-radius: 0;
+  background: #20363a;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.content-page .progress-bar {
+  width: 0;
+  height: 100%;
+  background: #91d9c5;
+  transition: width 180ms ease;
+}
+
+.content-page .options {
+  display: grid;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.content-page .option {
+  padding: 12px 14px;
+  border-color: #29454a;
+  border-radius: 4px;
+  background: #0d2026;
+  color: #dce6e2;
+  line-height: 1.5;
+}
+
+.content-page .option:hover {
+  border-color: #91d9c5;
+  background: #132b30;
+}
+
+.content-page .quiz-actions button {
+  min-height: 42px;
+  padding: 9px 15px;
+  border-radius: 4px;
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.content-page .quiz-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.content-page .primary-btn {
+  background: #91d9c5;
+  color: #09201e;
+}
+
+.content-page .secondary-btn {
+  border: 1px solid #41625d;
+  background: transparent;
+  color: #dce6e2;
+}
+
+.content-page .result-box {
+  display: none;
+  margin-top: 18px;
+  padding: 16px;
+  border-color: #41625d;
+  border-radius: 4px;
+  background: #0d2026;
+  color: #dce6e2;
+  line-height: 1.7;
+}
+
+.content-page .result-box.visible {
+  display: block;
+}
+
+.content-page .result-box strong {
+  color: #91d9c5;
+}
+
+.content-page a:focus-visible,
+.content-page button:focus-visible,
+.content-page input:focus-visible {
+  outline: 2px solid #91d9c5;
+  outline-offset: 3px;
+}
+
+@media (max-width: 760px) {
+  .content-page .content-wrapper {
+    width: min(100% - 32px, 640px);
+    padding-top: 22px;
+  }
+
+  .content-page .hero {
+    min-height: 300px;
+    padding: 30px 22px;
+  }
+
+  .content-page .hero h1 {
+    font-size: 1.8rem;
+  }
+
+  .content-page .article-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .content-page main > section,
+  .content-page main > .article-grid {
+    margin-top: 30px;
+  }
+
+  .content-page main > .hero {
+    margin-top: 0;
+  }
+
+  .content-page .info-panel {
+    padding: 18px 0 0;
+    border-top: 1px solid #41625d;
+    border-left: 0;
+  }
+
+  .content-page .timeline-item {
+    grid-template-columns: 72px minmax(0, 1fr);
+    gap: 12px;
+  }
+}
+
+@media (max-width: 460px) {
+  .content-page .content-wrapper {
+    width: calc(100% - 28px);
+  }
+
+  .content-page .hero {
+    min-height: 280px;
+    padding: 24px 16px;
+  }
+
+  .content-page .hero h1 {
+    font-size: 1.55rem;
+  }
+
+  .content-page .timeline-item {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+}

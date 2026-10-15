@@ -1,0 +1,22 @@
+node_modules/
+npm-debug.log*
+.git/
+.gitignore
+.env*
+.aws/
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+*.pem
+*.key
+*.p12
+*.pfx
+db.json
+docker-compose.yml
+Dockerfile
+README.md
+LICENSE
+Documentação/
+Banco de Dados/
+*.md

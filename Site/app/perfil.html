@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Perfil | Cosmos Tech</title>
+    <link rel="stylesheet" href="global.css" />
+    <link rel="stylesheet" href="perfil.css" />
+    <script src="./site-nav.js" defer></script>
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="logo">
+        <img src="./Imgs/ICONE.png" alt="Cosmos Tech Logo" />
+        <span><span class="cosmos">COSMOS</span><span class="tech">TECH</span></span>
+      </div>
+      <nav class="menu" id="mainMenu"></nav>
+    </header>
+
+    <main class="profile-shell">
+      <section class="profile-header">
+        <div id="avatar" class="avatar" aria-label="Avatar do usuário">A</div>
+        <div class="profile-identity">
+          <p class="profile-kicker">Conta Cosmos</p>
+          <h1 id="profileName">Carregando...</h1>
+          <div id="profileMeta" class="profile-subtitle">Carregando perfil...</div>
+        </div>
+      </section>
+
+      <div class="profile-layout">
+        <nav class="tabs" role="tablist" aria-label="Seções do perfil" aria-orientation="vertical">
+          <button class="tab-button" id="tab-button-dados" type="button" role="tab" aria-controls="tab-dados" aria-selected="true" data-tab="dados">Dados pessoais</button>
+          <button class="tab-button" id="tab-button-seguranca" type="button" role="tab" aria-controls="tab-seguranca" aria-selected="false" data-tab="seguranca">Segurança</button>
+          <button class="tab-button" id="tab-button-historico" type="button" role="tab" aria-controls="tab-historico" aria-selected="false" data-tab="historico">Histórico</button>
+          <button class="tab-button" id="tab-button-danger" type="button" role="tab" aria-controls="tab-danger" aria-selected="false" data-tab="danger">Excluir conta</button>
+        </nav>
+
+        <div class="profile-content">
+          <section id="tab-dados" class="tab-panel active" role="tabpanel" aria-labelledby="tab-button-dados">
+            <header class="panel-heading">
+              <h2>Dados pessoais</h2>
+              <p>Gerencie as informações que aparecem no seu perfil.</p>
+            </header>
+            <form id="profileForm">
+              <div class="form-grid">
+                <div class="field">
+                  <label for="nome">Nome</label>
+                  <input id="nome" name="nome" type="text" autocomplete="name" />
+                </div>
+                <div class="field">
+                  <label for="username">Nome de usuário</label>
+                  <input id="username" name="username" type="text" autocomplete="username" />
+                </div>
+                <div class="field">
+                  <label for="email">E-mail</label>
+                  <input id="email" name="email" type="email" autocomplete="email" disabled />
+                </div>
+                <div class="field">
+                  <label for="cargo">Área de interesse</label>
+                  <input id="cargo" name="cargo" type="text" placeholder="Astronomia, exploração espacial..." />
+                </div>
+                <div class="field field-wide">
+                  <label for="bio">Biografia</label>
+                  <textarea id="bio" name="bio" maxlength="280" placeholder="Conte um pouco sobre você..."></textarea>
+                </div>
+                <div class="field field-wide">
+                  <label for="avatar_url">Imagem do perfil</label>
+                  <input id="avatar_url" name="avatar_url" type="url" placeholder="https://..." />
+                </div>
+              </div>
+              <div class="actions">
+                <button class="primary-btn" type="submit">Salvar alterações</button>
+              </div>
+            </form>
+          </section>
+
+          <section id="tab-seguranca" class="tab-panel" role="tabpanel" aria-labelledby="tab-button-seguranca">
+            <header class="panel-heading">
+              <h2>Segurança</h2>
+              <p>Atualize sua senha para manter sua conta protegida.</p>
+            </header>
+            <form id="passwordForm">
+              <div class="form-grid">
+                <div class="field">
+                  <label for="senhaAtual">Senha atual</label>
+                  <input id="senhaAtual" type="password" autocomplete="current-password" />
+                </div>
+                <div class="field">
+                  <label for="novaSenha">Nova senha</label>
+                  <input id="novaSenha" type="password" autocomplete="new-password" />
+                </div>
+              </div>
+              <div class="actions">
+                <button class="primary-btn" type="submit">Atualizar senha</button>
+              </div>
+            </form>
+          </section>
+
+          <section id="tab-historico" class="tab-panel" role="tabpanel" aria-labelledby="tab-button-historico">
+            <header class="panel-heading">
+              <h2>Histórico de atividades</h2>
+              <p>Veja seus resultados registrados na plataforma.</p>
+            </header>
+            <div id="historyList" class="history-list"></div>
+          </section>
+
+          <section id="tab-danger" class="tab-panel" role="tabpanel" aria-labelledby="tab-button-danger">
+            <header class="panel-heading">
+              <h2>Excluir conta</h2>
+              <p>Essa ação remove seu perfil e os dados associados permanentemente.</p>
+            </header>
+            <p class="danger-copy">Para confirmar, você precisará informar sua senha. Essa ação não pode ser desfeita.</p>
+            <div class="actions">
+              <button id="openDeleteModal" class="danger-btn" type="button">Excluir minha conta</button>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <div id="deleteModal" class="modal" aria-hidden="true" aria-modal="true" role="dialog">
+      <div class="modal-card">
+        <h2>Excluir conta</h2>
+        <p>Essa ação é permanente. Confirme sua senha para continuar.</p>
+        <div class="field">
+          <label for="deletePassword">Senha</label>
+          <input id="deletePassword" type="password" />
+        </div>
+        <div class="actions">
+          <button id="confirmDelete" class="danger-btn" type="button">Confirmar exclusão</button>
+          <button id="cancelDelete" class="ghost-btn" type="button">Cancelar</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="toast" class="toast" aria-live="polite"></div>
+
+    <script>
+      const storedUser = JSON.parse(sessionStorage.getItem("cosmos_user") || "{}");
+      if (!storedUser.id) window.location.href = "./login.html";
+      const userName = storedUser.nome || "Usuário";
+      // Navbar controlada centralmente por site-nav.js (fonte unica de verdade).
+
+      function showToast(message) {
+        const toast = document.getElementById("toast");
+        toast.textContent = message;
+        toast.classList.add("show");
+        setTimeout(function () {
+          toast.classList.remove("show");
+        }, 2200);
+      }
+
+      function buildAvatar(name) {
+        return (name || "A").trim().charAt(0).toUpperCase();
+      }
+
+      function setAvatar(name, url) {
+        const avatar = document.getElementById("avatar");
+        avatar.replaceChildren();
+        if (!url) {
+          avatar.textContent = buildAvatar(name);
+          return;
+        }
+        const image = document.createElement("img");
+        image.src = url;
+        image.alt = `Foto de perfil de ${name}`;
+        image.onerror = function () { avatar.textContent = buildAvatar(name); };
+        avatar.append(image);
+      }
+
+      async function fetchProfile() {
+        const response = await fetch("/usuarios/me", {
+          headers: { "X-User-Id": String(storedUser.id) }
+        });
+        const data = await response.json();
+        if (!response.ok) {
+          throw new Error(data.message || "Não foi possível carregar o perfil.");
+        }
+
+        document.getElementById("profileName").textContent = data.nome || "Usuário";
+        document.getElementById("profileMeta").textContent = `@${data.username || "usuario"} • ${data.cargo || "Explorador espacial"}`;
+        setAvatar(data.nome || data.username || "A", data.avatar_url);
+
+        document.getElementById("nome").value = data.nome || "";
+        document.getElementById("username").value = data.username || "";
+        document.getElementById("email").value = data.email || "";
+        document.getElementById("cargo").value = data.cargo || "";
+        document.getElementById("bio").value = data.bio || "";
+        document.getElementById("avatar_url").value = data.avatar_url || "";
+
+        const list = document.getElementById("historyList");
+        const historia = data.historico || [];
+        if (!historia.length) {
+          list.innerHTML = '<div class="empty-state">Você ainda não fez nenhum quiz.</div>';
+          return;
+        }
+
+        const melhor = historia.reduce((best, item) => (Number(item.aproveitamento) > Number(best.aproveitamento) ? item : best), historia[0]);
+        list.innerHTML = historia.map((item) => `
+          <div class="history-item ${item.quiz === melhor.quiz ? "highlight" : ""}">
+            <div>
+              <strong>${item.quiz}</strong>
+              <div>${new Date(item.dataRegistro).toLocaleDateString("pt-BR")}</div>
+            </div>
+            <div>
+              <div>Acertos: ${item.totalCerto}</div>
+              <div>Erros: ${item.totalErrado}</div>
+              <div>Aproveitamento: ${item.aproveitamento}%</div>
+            </div>
+          </div>
+        `).join("");
+      }
+
+      document.getElementById("profileForm").addEventListener("submit", async function (event) {
+        event.preventDefault();
+        const payload = {
+          nome: document.getElementById("nome").value.trim(),
+          username: document.getElementById("username").value.trim(),
+          bio: document.getElementById("bio").value.trim(),
+          cargo: document.getElementById("cargo").value.trim(),
+          avatar_url: document.getElementById("avatar_url").value.trim(),
+        };
+
+        const response = await fetch("/usuarios/me", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            "X-User-Id": String(storedUser.id)
+          },
+          body: JSON.stringify(payload)
+        });
+        const data = await response.json();
+        if (!response.ok) {
+          throw new Error(data.message || "Não foi possível atualizar o perfil.");
+        }
+        showToast("Perfil atualizado com sucesso.");
+        await fetchProfile();
+      });
+
+      document.getElementById("passwordForm").addEventListener("submit", async function (event) {
+        event.preventDefault();
+        const senhaAtual = document.getElementById("senhaAtual").value;
+        const novaSenha = document.getElementById("novaSenha").value;
+
+        const response = await fetch("/usuarios/me/senha", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            "X-User-Id": String(storedUser.id)
+          },
+          body: JSON.stringify({ senhaAtual, novaSenha })
+        });
+        const data = await response.json();
+        if (!response.ok) {
+          throw new Error(data.message || "Não foi possível atualizar a senha.");
+        }
+        document.getElementById("passwordForm").reset();
+        showToast("Senha atualizada com sucesso.");
+      });
+
+      document.querySelectorAll(".tab-button").forEach(function (button) {
+        button.addEventListener("click", function () {
+          document.querySelectorAll(".tab-panel").forEach((panel) => panel.classList.remove("active"));
+          document.querySelectorAll(".tab-button").forEach((tab) => tab.setAttribute("aria-selected", "false"));
+          button.setAttribute("aria-selected", "true");
+          document.querySelectorAll(".tab-button").forEach((tab) => tab.setAttribute("tabindex", "-1"));
+          button.setAttribute("tabindex", "0");
+          const panelId = `tab-${button.dataset.tab}`;
+          document.getElementById(panelId).classList.add("active");
+        });
+      });
+
+      document.getElementById("openDeleteModal").addEventListener("click", function () {
+        document.getElementById("deleteModal").setAttribute("aria-hidden", "false");
+      });
+
+      document.getElementById("cancelDelete").addEventListener("click", function () {
+        document.getElementById("deleteModal").setAttribute("aria-hidden", "true");
+        document.getElementById("deletePassword").value = "";
+      });
+
+      document.getElementById("confirmDelete").addEventListener("click", async function () {
+        const senha = document.getElementById("deletePassword").value;
+        const response = await fetch("/usuarios/me", {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            "X-User-Id": String(storedUser.id)
+          },
+          body: JSON.stringify({ senha })
+        });
+        const data = await response.json();
+        if (!response.ok) {
+          throw new Error(data.message || "Não foi possível excluir a conta.");
+        }
+        sessionStorage.clear();
+        window.location.href = "./login.html";
+      });
+
+      fetchProfile().catch(function (error) {
+        showToast(error.message);
+      });
+    </script>
+  </body>
+</html>

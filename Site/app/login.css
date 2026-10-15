@@ -1,0 +1,139 @@
+/* ============================================
+   Cosmos-TECH — Login Page
+   ============================================ */
+
+/* ── Video Background ── */
+.video-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.video-container video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: cover;
+}
+
+/* ── Content Wrapper ── */
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 80px);
+  padding: 40px 20px;
+}
+
+/* ── Login Card (Glassmorphism) ── */
+.login {
+  background: rgba(3, 20, 43, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  padding: 40px 36px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.login h2 {
+  font-family: var(--font-title);
+  text-align: center;
+  margin-bottom: 30px;
+  color: var(--accent);
+  font-size: 1.6rem;
+  letter-spacing: 2px;
+}
+
+.login label {
+  display: block;
+  margin-top: 16px;
+  margin-bottom: 6px;
+  color: var(--text-secondary);
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.login input {
+  width: 100%;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(0, 234, 255, 0.2);
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  outline: none;
+  transition: var(--transition);
+}
+
+.login input::placeholder {
+  color: var(--text-muted);
+}
+
+.login input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 12px var(--accent-glow);
+  background: rgba(0, 234, 255, 0.03);
+}
+
+.login button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 28px;
+  background: linear-gradient(135deg, var(--blue), var(--accent));
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 1rem;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.login button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 25px var(--accent-glow), 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.login button:active {
+  transform: translateY(0);
+}
+
+/* ── Alert div styling ── */
+#div_alert {
+  margin-top: 12px;
+  padding: 8px;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  text-align: center;
+  color: var(--accent) !important;
+}
+
+/* ── Responsividade ── */
+@media (max-width: 480px) {
+  .login {
+    padding: 30px 24px;
+    margin: 0 10px;
+  }
+
+  .login h2 {
+    font-size: 1.3rem;
+  }
+}

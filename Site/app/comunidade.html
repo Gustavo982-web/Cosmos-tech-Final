@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Comunidade | Cosmos Tech</title>
+    <link rel="stylesheet" href="global.css" />
+    <link rel="stylesheet" href="comunidade.css" />
+    <script src="./auth-guard.js"></script>
+    <script src="./site-nav.js" defer></script>
+  </head>
+  <body class="community-page">
+    <header class="navbar">
+      <div class="logo">
+        <img src="./Imgs/ICONE.png" alt="Cosmos Tech Logo" />
+        <span><span class="cosmos">COSMOS</span><span class="tech">TECH</span></span>
+      </div>
+      <nav class="menu">
+        <a href="./index.html">Início</a>
+        <a href="./software.html">Sistema Solar</a>
+        <a href="./viagens.html">Viagens Espaciais</a>
+        <a class="active" href="./comunidade.html">Comunidade</a>
+        <a href="./perfil.html">Perfil</a>
+        <a href="#" id="logoutLink">Sair</a>
+      </nav>
+    </header>
+
+    <main class="community-shell">
+      <header class="community-intro">
+        <div>
+          <p class="community-kicker">COSMOS / COMUNIDADE</p>
+          <h1>Diário de bordo</h1>
+          <p>Compartilhe uma observação, uma pergunta ou algo que descobriu. A conversa começa por aqui.</p>
+        </div>
+        <p id="communityCount" class="community-count" aria-live="polite"></p>
+      </header>
+
+      <div class="community-layout">
+        <section class="community-main" aria-label="Publicações da comunidade">
+          <form id="publicationForm" class="composer">
+            <label class="composer-label" for="publicationText">O que você observou?</label>
+            <textarea id="publicationText" maxlength="1200" placeholder="Uma observação do céu, uma pergunta sobre uma missão, ou uma ideia para compartilhar..."></textarea>
+            <div class="composer-footer">
+              <span id="characterCount" class="character-count">0 / 1200</span>
+              <button id="publishButton" class="publish-button" type="submit">Publicar</button>
+            </div>
+            <p id="composerMessage" class="community-message" aria-live="polite"></p>
+          </form>
+
+          <div class="feed-heading">
+            <h2>Publicações recentes</h2>
+          </div>
+          <div id="feedList" class="feed-list" aria-live="polite"></div>
+        </section>
+
+        <aside class="community-aside" aria-label="Sobre a comunidade">
+          <h2>Conversa aberta</h2>
+          <p>Posts podem ser curtidos e comentados. Compartilhe ideias e experiências com respeito e curiosidade.</p>
+          <p>O feed é atualizado em ordem cronológica. Seus posts ficam associados ao seu perfil.</p>
+        </aside>
+      </div>
+    </main>
+
+    <script>
+      const currentUser = JSON.parse(sessionStorage.getItem("cosmos_user") || "null");
+      const feedList = document.getElementById("feedList");
+      const publicationForm = document.getElementById("publicationForm");
+      const publicationText = document.getElementById("publicationText");
+      const publishButton = document.getElementById("publishButton");
+      const composerMessage = document.getElementById("composerMessage");
+      const characterCount = document.getElementById("characterCount");
+
+      function requestHeaders(includeJson) {
+        const headers = { "X-User-Id": String(currentUser.id) };
+        if (includeJson) headers["Content-Type"] = "application/json";
+        return headers;
+      }
+
+      async function readResponse(response) {
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.message || "Não foi possível concluir a solicitação.");
+        return data;
+      }
+
+      function makeAvatar(name, imageUrl) {
+        const avatar = document.createElement("span");
+        avatar.className = "post-avatar";
+        avatar.setAttribute("aria-hidden", "true");
+        if (imageUrl) {
+          const image = document.createElement("img");
+          image.src = imageUrl;
+          image.alt = "";
+          image.onerror = function () { avatar.textContent = (name || "U").trim().charAt(0).toUpperCase(); };
+          avatar.append(image);
+        } else {
+          avatar.textContent = (name || "U").trim().charAt(0).toUpperCase();
+        }
+        return avatar;
+      }
+
+      function formatDate(value) {
+        const date = new Date(value);
+        if (Number.isNaN(date.getTime())) return "agora";
+        return new Intl.DateTimeFormat("pt-BR", { dateStyle: "medium", timeStyle: "short" }).format(date);
+      }
+
+      function renderComment(comment) {
+        const line = document.createElement("p");
+        line.className = "post-comment";
+        const author = document.createElement("strong");
+        author.textContent = comment.author ? comment.author.nome : "Conta removida";
+        const text = document.createTextNode(comment.texto);
+        line.append(author, text);
+        return line;
+      }
+
+      function renderPost(post) {
+        const article = document.createElement("article");
+        article.className = "post";
+        article.dataset.postId = String(post.id);
+
+        const header = document.createElement("header");
+        header.className = "post-header";
+        header.append(makeAvatar(post.author.nome, post.author.avatar_url));
+
+        const authorBlock = document.createElement("div");
+        const authorName = document.createElement("p");
+        authorName.className = "post-author";
+        authorName.textContent = post.author.nome;
+        const handle = document.createElement("p");
+        handle.className = "post-handle";
+        handle.textContent = `@${post.author.username || "explorador"} · ${formatDate(post.criadoEm)}`;
+        authorBlock.append(authorName, handle);
+        header.append(authorBlock);
+
+        const body = document.createElement("p");
+        body.className = "post-body";
+        body.textContent = post.texto;
+
+        const actions = document.createElement("div");
+        actions.className = "post-actions";
+        const reactionButton = document.createElement("button");
+        reactionButton.className = "post-action";
+        reactionButton.type = "button";
+        reactionButton.dataset.action = "react";
+        reactionButton.setAttribute("aria-pressed", String(post.reagido));
+        reactionButton.textContent = `${post.reagido ? "Curtido" : "Curtir"} (${post.totalReacoes})`;
+        const commentButton = document.createElement("button");
+        commentButton.className = "post-action";
+        commentButton.type = "button";
+        commentButton.dataset.action = "focus-comment";
+        commentButton.textContent = `Comentar (${post.comentarios.length})`;
+        actions.append(reactionButton, commentButton);
+
+        const comments = document.createElement("div");
+        comments.className = "post-comments";
+        for (const comment of post.comentarios) comments.append(renderComment(comment));
+
+        const commentForm = document.createElement("form");
+        commentForm.className = "comment-form";
+        commentForm.dataset.commentForm = "true";
+        const input = document.createElement("input");
+        input.className = "comment-input";
+        input.name = "comment";
+        input.maxLength = 600;
+        input.placeholder = "Escreva um comentário...";
+        input.setAttribute("aria-label", "Escreva um comentário");
+        const submit = document.createElement("button");
+        submit.className = "comment-submit";
+        submit.type = "submit";
+        submit.textContent = "Enviar";
+        commentForm.append(input, submit);
+
+        article.append(header, body, actions);
+        if (post.comentarios.length) article.append(comments);
+        article.append(commentForm);
+        return article;
+      }
+
+      async function loadFeed() {
+        feedList.setAttribute("aria-busy", "true");
+        try {
+          const response = await fetch("/social/publicacoes", { headers: requestHeaders(false) });
+          const posts = await readResponse(response);
+          feedList.replaceChildren();
+          document.getElementById("communityCount").textContent = `${posts.length} ${posts.length === 1 ? "publicação" : "publicações"}`;
+          if (!posts.length) {
+            const empty = document.createElement("p");
+            empty.className = "empty-feed";
+            empty.textContent = "Ainda não há publicações. Compartilhe a primeira observação ou pergunta da comunidade.";
+            feedList.append(empty);
+          } else {
+            for (const post of posts) feedList.append(renderPost(post));
+          }
+        } catch (error) {
+          feedList.textContent = error.message;
+        } finally {
+          feedList.setAttribute("aria-busy", "false");
+        }
+      }
+
+      publicationText.addEventListener("input", function () {
+        characterCount.textContent = `${publicationText.value.length} / 1200`;
+      });
+
+      publicationForm.addEventListener("submit", async function (event) {
+        event.preventDefault();
+        const texto = publicationText.value.trim();
+        if (!texto) {
+          composerMessage.textContent = "Escreva algo antes de publicar.";
+          composerMessage.classList.add("error");
+          return;
+        }
+
+        publishButton.disabled = true;
+        composerMessage.textContent = "";
+        composerMessage.classList.remove("error");
+        try {
+          const response = await fetch("/social/publicacoes", {
+            method: "POST",
+            headers: requestHeaders(true),
+            body: JSON.stringify({ texto }),
+          });
+          await readResponse(response);
+          publicationForm.reset();
+          characterCount.textContent = "0 / 1200";
+          composerMessage.textContent = "Publicação adicionada ao diário.";
+          await loadFeed();
+        } catch (error) {
+          composerMessage.textContent = error.message;
+          composerMessage.classList.add("error");
+        } finally {
+          publishButton.disabled = false;
+        }
+      });
+
+      feedList.addEventListener("click", async function (event) {
+        const button = event.target.closest("button[data-action]");
+        if (!button) return;
+        const post = button.closest(".post");
+        if (button.dataset.action === "focus-comment") {
+          post.querySelector(".comment-input").focus();
+          return;
+        }
+        if (button.dataset.action !== "react") return;
+
+        button.disabled = true;
+        try {
+          const method = button.getAttribute("aria-pressed") === "true" ? "DELETE" : "PUT";
+          const response = await fetch(`/social/publicacoes/${post.dataset.postId}/reacao`, {
+            method,
+            headers: requestHeaders(false),
+          });
+          await readResponse(response);
+          await loadFeed();
+        } catch (error) {
+          composerMessage.textContent = error.message;
+          composerMessage.classList.add("error");
+        } finally {
+          button.disabled = false;
+        }
+      });
+
+      feedList.addEventListener("submit", async function (event) {
+        const form = event.target.closest("form[data-comment-form]");
+        if (!form) return;
+        event.preventDefault();
+        const input = form.elements.comment;
+        const texto = input.value.trim();
+        if (!texto) return;
+
+        const submit = form.querySelector("button[type='submit']");
+        submit.disabled = true;
+        try {
+          const post = form.closest(".post");
+          const response = await fetch(`/social/publicacoes/${post.dataset.postId}/comentarios`, {
+            method: "POST",
+            headers: requestHeaders(true),
+            body: JSON.stringify({ texto }),
+          });
+          await readResponse(response);
+          await loadFeed();
+        } catch (error) {
+          composerMessage.textContent = error.message;
+          composerMessage.classList.add("error");
+        } finally {
+          submit.disabled = false;
+        }
+      });
+
+      document.getElementById("logoutLink").addEventListener("click", function (event) {
+        event.preventDefault();
+        sessionStorage.removeItem("cosmos_user");
+        window.location.href = "./login.html";
+      });
+
+      loadFeed();
+    </script>
+  </body>
+</html>

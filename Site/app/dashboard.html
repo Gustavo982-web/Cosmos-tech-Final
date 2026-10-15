@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Desempenho | Cosmos Tech</title>
+    <link rel="stylesheet" href="global.css" />
+    <link rel="stylesheet" href="dashboard.css" />
+    <script src="./site-nav.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <header class="navbar">
+        <div class="logo">
+            <img src="./Imgs/ICONE.png" alt="Cosmos Tech Logo" />
+            <span>
+                <span class="cosmos">COSMOS</span>
+                <span class="tech">TECH</span>
+            </span>
+
+            <nav class="menu">
+                <a href="software.html"> Nosso Lar</a>
+                <a href="viagens.html">Viagens</a>
+                <a class="active" href="dashboard.html">Dashboard</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="dashboard">
+        <div class="dashboard-container">
+            <div class="top-user">
+                <div class="user-info">
+                    <h2>Olá, <span id="b_usuario">Usuário</span></h2>
+                    <p>Bem-vindo ao seu painel de desempenho!</p>
+                </div>
+
+                <div class="kpis">
+                    <div class="kpi-card">
+                        <h4>Você se interessa mais por</h4>
+                        <p id="quiz_mais_jogado">Ainda não jogou nenhum quiz...</p>
+                    </div>
+
+                    <div class="kpi-card">
+                        <h4>Sua maior pontuação foi </h4>
+                        <p id="maior_pontuacao">Sem pontuação...</p>
+                    </div>
+                    <div class="kpi-card">
+                        <h4>Quanto você jogou o quiz Sistema solar</h4>
+                        <p id="qtdSolarMsg">Sem pontuação...</p>
+                    </div>
+                    <div class="kpi-card">
+                        <h4>Quanto você jogou o quiz de viagens espacias</h4>
+                        <p id="qtdViagensMsg">Sem pontuação...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grafico-box">
+                <div class="graficos-lado">
+                    <div class="grafico-item">
+                        <h3>Desempenho(%) — Sistema Solar </h3>
+                        <div class="estiloGrafico">
+                            <canvas id="graficoSistemaSolar"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="grafico-item">
+                        <h3>Desempenho (%) — Viagens Espaciais </h3>
+                        <div class="estiloGrafico">
+                            <canvas id="graficoViagensEspaciais"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
+
+<script>
+
+    // fetch busca dados da API
+    const user = JSON.parse(sessionStorage.getItem("cosmos_user") || "null");
+    if (!user || !user.id) window.location.href = "./login.html";
+    b_usuario.textContent = user ? user.nome : "Explorador";
+
+    // função que vai coletar carregador todos os resultados das função criarGráfico e a
+    function carregarResultado() {
+        fetch("/quiz/resultados", { headers: { "X-User-Id": String(user.id) } })
+            .then(async (res) => {
+                const dados = await res.json();
+                if (!res.ok) throw new Error(dados.message || "Não foi possível carregar os resultados.");
+                return dados;
+            })
+            .then((dados) => {
+                console.log("Resultados recebidos: ", dados);
+                criarGrafico(dados);
+                kpis(dados);
+            })
+            .catch((err) => console.log("Erro ao carregar os resultados", err));
+    }
+
+    // função que vai criar as kpis
+
+    function kpis(dados) {
+
+        // os dados começa em nagativo pois se começa com zero e ele fez 0 quiz vai falhar na validação do if 
+        var solarAttempts = 0;
+        var travelAttempts = 0;
+        var bestResult = null;
+        var qtdSolar = 0;
+        var qtdViagens = 0;
+
+        for (var i = 0; i < dados.length; i++) {
+            var nome = String(dados[i].quiz || dados[i].nomeQuiz || "");
+            var normalizedName = nome.toLowerCase();
+            var certos = Number(dados[i].totalCerto);
+            var erros = Number(dados[i].totalErrado);
+            if (normalizedName.includes("sistema solar")) {
+                solarAttempts += 1;
+                qtdSolar += 1;
+            }
+            if (normalizedName.includes("viagens espaciais")) {
+                travelAttempts += 1;
+                qtdViagens += 1;
+            }
+            if (!bestResult || certos > Number(bestResult.totalCerto)) {
+                bestResult = { nome: nome, totalCerto: certos };
+            }
+        }
+
+        if (qtdSolar == 0) {
+            qtdSolarMsg.innerHTML = "Nunca jogou"
+        }
+        else {
+            qtdSolarMsg.innerHTML = `${qtdSolar} vezes`
+        };
+
+        if (qtdViagens == 0) {
+            qtdViagensMsg.innerHTML = "Nunca jogou"
+        }
+        else {
+            qtdViagensMsg.innerHTML = `${qtdViagens} vezes`
+        };
+
+        var mostPlayed = solarAttempts >= travelAttempts ? "Sistema Solar" : "Viagens Espaciais";
+        quiz_mais_jogado.textContent = solarAttempts + travelAttempts === 0 ? "Ainda não jogou nenhum quiz..." : mostPlayed;
+        maior_pontuacao.textContent = bestResult ? `${bestResult.totalCerto} pontos — ${bestResult.nome}` : "Sem pontuação...";
+    }
+
+    function criarGrafico(dados) {
+        var nomes = [];
+        var acertos = [];
+        var erros = [];
+
+        var nomeSolar = [];
+        var acertosSolar = [];
+        var errosSolar = [];
+
+        var nomeViagens = [];
+        var acertosViagens = [];
+        var errosViagens = [];
+
+        var somaAcertosSolar = 0;
+        var somaErrosSolar = 0;
+
+        var somaAcertosViagens = 0;
+        var somaErrosViagens = 0;
+
+        for (var i = 0; i < dados.length; i++) {
+            var quizName = String(dados[i].quiz || dados[i].nomeQuiz || "");
+            var normalizedName = quizName.toLowerCase();
+            nomes.push(quizName);
+            acertos.push(dados[i].totalCerto);
+            erros.push(dados[i].totalErrado);
+
+            if (normalizedName.includes("sistema solar")) {
+                nomeSolar.push(quizName);
+                acertosSolar.push(dados[i].totalCerto);  
+                errosSolar.push(dados[i].totalErrado);
+
+
+                somaAcertosSolar += Number(dados[i].totalCerto);
+                somaErrosSolar += Number(dados[i].totalErrado);
+
+            }
+            if (normalizedName.includes("viagens espaciais")) {
+                nomeViagens.push(quizName);
+                acertosViagens.push(dados[i].totalCerto);
+                errosViagens.push(dados[i].totalErrado);
+
+                somaAcertosViagens += Number(dados[i].totalCerto);
+                somaErrosViagens += Number(dados[i].totalErrado);
+            }
+        }
+
+        var acertosSolarPorc = 0;
+        var errosSolarPorc = 0;
+
+        var acertosViagensPorc = 0;
+        var errosViagensPorc = 0;
+
+        var totalSolar = somaAcertosSolar + somaErrosSolar;
+        var totalViagens = somaAcertosViagens + somaErrosViagens;
+
+
+        if (totalSolar === 0) {
+            acertosSolarPorc = 0;
+            errosSolarPorc = 0;
+        } else {
+            acertosSolarPorc = (somaAcertosSolar / totalSolar) * 100;
+            errosSolarPorc = (somaErrosSolar / totalSolar) * 100;
+        }
+
+        if (totalViagens === 0) {
+            acertosViagensPorc = 0;
+            errosViagensPorc = 0;
+        } else {
+            acertosViagensPorc = (somaAcertosViagens / totalViagens) * 100;
+            errosViagensPorc = (somaErrosViagens / totalViagens) * 100;
+        }
+
+
+
+
+
+        const ctx1 = document.getElementById("graficoSistemaSolar").getContext("2d");
+        new Chart(ctx1, {
+            type: "pie",
+            data: {
+                labels: ["Acertos", "Erros"],
+                datasets: [{
+                    data: [acertosSolarPorc, errosSolarPorc],
+                    backgroundColor: [
+                        "rgba(79, 224, 255, 0.6)",
+                        "rgba(255, 99, 132, 0.6)"
+                    ]
+                }]
+            },
+            options: { responsive: true }
+        });
+
+        const ctx2 = document.getElementById("graficoViagensEspaciais").getContext("2d");
+        new Chart(ctx2, {
+            type: "pie",
+            data: {
+                labels: ["Acertos", "Erros"],
+                datasets: [{
+                    data: [acertosViagensPorc, errosViagensPorc],
+                    backgroundColor: [
+                        "rgba(79, 224, 255, 0.6)",
+                        "rgba(255, 99, 132, 0.6)"
+                    ]
+                }]
+            },
+            options: { responsive: true }
+        });
+
+    }
+
+    carregarResultado();
+</script>

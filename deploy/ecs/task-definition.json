@@ -1,0 +1,60 @@
+{
+  "family": "cosmos-tech",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "256",
+  "memory": "512",
+  "executionRoleArn": "REPLACE_WITH_ECS_EXECUTION_ROLE_ARN",
+  "runtimePlatform": {
+    "cpuArchitecture": "X86_64",
+    "operatingSystemFamily": "LINUX"
+  },
+  "containerDefinitions": [
+    {
+      "name": "api-backend",
+      "image": "DOCKERHUB_USERNAME/cosmos-tech:latest",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 3000,
+          "protocol": "tcp"
+        }
+      ],
+      "environment": [
+        { "name": "NODE_ENV", "value": "production" },
+        { "name": "APP_HOST", "value": "0.0.0.0" },
+        { "name": "APP_PORT", "value": "3000" },
+        { "name": "PORT", "value": "3000" },
+        { "name": "DB_MODE", "value": "mysql" },
+        { "name": "DB_HOST", "value": "REPLACE_WITH_RDS_ENDPOINT" },
+        { "name": "DB_PORT", "value": "3306" },
+        { "name": "DB_NAME", "value": "bancocosmo" },
+        { "name": "DB_SSL", "value": "true" },
+        { "name": "CORS_ORIGIN", "value": "*" }
+      ],
+      "secrets": [
+        { "name": "DB_USER", "valueFrom": "REPLACE_WITH_DB_USER_SECRET_ARN" },
+        { "name": "DB_PASSWORD", "valueFrom": "REPLACE_WITH_DB_PASSWORD_SECRET_ARN" }
+      ],
+      "healthCheck": {
+        "command": [
+          "CMD-SHELL",
+          "node -e \"fetch('http://127.0.0.1:3000/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))\""
+        ],
+        "interval": 30,
+        "timeout": 5,
+        "retries": 3,
+        "startPeriod": 30
+      },
+      "stopTimeout": 30,
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/cosmos-tech",
+          "awslogs-region": "REPLACE_WITH_AWS_REGION",
+          "awslogs-stream-prefix": "app"
+        }
+      }
+    }
+  ]
+}
