@@ -29,9 +29,7 @@ jobs:
       - name: Testar o build da imagem Docker (sem enviar)
         run: docker build -t cosmos-tech:ci-teste .
 
-  # ---------------------------------------------------------------
-  # CD - publicar no Docker Hub (SO MANUAL via "Run workflow")
-  # ---------------------------------------------------------------
+ 
   publicar:
     name: CD - Enviar imagem ao Docker Hub
     runs-on: ubuntu-latest
